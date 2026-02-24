@@ -33,7 +33,7 @@ export const ReportsPage = () => {
           <h1 className="text-4xl font-semibold text-gray-900 mb-3 tracking-tight">
             Reportes
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
+          <p className="text-lg text-gray-600 leading-relaxed ">
             Genera y descarga reportes en PDF de tus proyectos, incluyendo gráficas, estadísticas y análisis de sensores.
           </p>
         </div>
