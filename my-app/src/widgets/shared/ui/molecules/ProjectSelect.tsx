@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { SelectTrigger } from '../atoms/SelectTrigger';
 import { SelectOption } from '../atoms/SelectOption';
+import { SensorBadge, type SensorType } from '../atoms/SensorBadge';
 
 interface Project {
   id: string;
   name: string;
+  sensors?: SensorType[];
 }
 
 interface ProjectSelectProps {
@@ -59,6 +61,15 @@ export const ProjectSelect = ({
               value={project.id}
               label={project.name}
               onClick={handleSelect}
+              badges={
+                project.sensors && project.sensors.length > 0 ? (
+                  <>
+                    {project.sensors.map(sensor => (
+                      <SensorBadge key={sensor} sensor={sensor} size="sm" />
+                    ))}
+                  </>
+                ) : undefined
+              }
             />
           ))}
         </div>
