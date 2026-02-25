@@ -11,6 +11,7 @@ import { useExportOptions } from '@/widgets/features/export-report-options/useEx
 import { useSelectedSensors } from '@/widgets/features/select-sensors/useSelectedSensors';
 import type { Project } from '@/widgets/entities/project';
 
+
 // Mock data
 const mockProjects: Project[] = [
   { 
@@ -83,16 +84,17 @@ export const ReportsPage = () => {
         </div>
         
         {/* Report Configuration Card */}
-        <div className="mb-8">
-          <ReportConfigurationCard 
-            enabled={hasSelection}
-            reportType={reportType}
-            onReportTypeChange={handleReportTypeChange}
-            availableSensors={selectedProject?.sensors || []}
-            selectedSensors={selectedSensors}
-            onSensorToggle={toggleSensor}
-          />
-        </div>
+          {hasSelection && (
+            <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-300">
+              <ReportConfigurationCard
+                reportType={reportType}
+                onReportTypeChange={handleReportTypeChange}
+                availableSensors={selectedProject?.sensors || []}
+                selectedSensors={selectedSensors}
+                onSensorToggle={toggleSensor}
+              />
+            </div>
+          )}
         
         {/* Report Content Card */}
         {hasReportType && (

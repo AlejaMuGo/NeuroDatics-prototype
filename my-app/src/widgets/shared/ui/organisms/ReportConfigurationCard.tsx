@@ -3,7 +3,6 @@ import { SensorBadge, type SensorType } from '../atoms/SensorBadge';
 import type { ReportType } from '@/widgets/entities/report';
 
 interface ReportConfigurationCardProps {
-  enabled: boolean;
   reportType: ReportType;
   onReportTypeChange: (type: ReportType) => void;
   availableSensors: SensorType[];
@@ -30,7 +29,6 @@ const reportOptions = [
 ];
 
 export const ReportConfigurationCard = ({ 
-  enabled, 
   reportType, 
   onReportTypeChange,
   availableSensors,
@@ -39,11 +37,7 @@ export const ReportConfigurationCard = ({
 }: ReportConfigurationCardProps) => {
   return (
     <Card 
-      className={`p-8 transition-all duration-300 ${
-        enabled 
-          ? 'opacity-100' 
-          : 'opacity-50 pointer-events-none'
-      }`}
+      className="p-8 transition-all duration-300"
     >
       <div className="flex items-start gap-4 mb-6">
         <div className="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
@@ -63,21 +57,18 @@ export const ReportConfigurationCard = ({
         {reportOptions.map((option) => (
           <div key={option.id}>
             <label
-              className={`flex items-start gap-3 p-4 border border-gray-200 rounded-xl cursor-pointer transition-all duration-200 ${
-                enabled 
-                  ? reportType === option.id
+                className={`flex items-start gap-3 p-4 border border-gray-200 rounded-xl cursor-pointer transition-all duration-200 ${
+                  reportType === option.id
                     ? 'border-gray-500 bg-gray-100/100'
                     : 'hover:border-gray-300 hover:bg-gray-100/100'
-                  : ''
-              }`}
-            >
+                }`}
+              >
               <input
                 type="radio"
                 name="report-type"
                 value={option.id}
                 checked={reportType === option.id}
                 onChange={() => onReportTypeChange(option.id)}
-                disabled={!enabled}
                 className="mt-1 w-4 h-4 accent-gray-950"
               />
               <div className="flex-1">
