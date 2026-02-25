@@ -1,37 +1,48 @@
 import { Card } from '../atoms/Card';
-import { useState } from 'react';
+import { SensorBadge, type SensorType } from '../atoms/SensorBadge';
+import type { ReportType } from '@/widgets/entities/report';
 
 interface ReportConfigurationCardProps {
   enabled: boolean;
+  reportType: ReportType;
+  onReportTypeChange: (type: ReportType) => void;
+  availableSensors: SensorType[];
+  selectedSensors: SensorType[];
+  onSensorToggle: (sensor: SensorType) => void;
 }
 
 const reportOptions = [
   {
-    id: 'complete',
+    id: 'complete' as const,
     title: 'Reporte completo del proyecto',
     description: 'Incluye todos los sensores y análisis disponibles del proyecto seleccionado'
   },
   {
-    id: 'by-sensor',
+    id: 'by-sensor' as const,
     title: 'Reporte por sensor',
     description: 'Selecciona uno o más sensores específicos para incluir en el reporte'
   },
   {
-    id: 'comparative',
+    id: 'comparative' as const,
     title: 'Reporte comparativo',
     description: 'Análisis comparativo entre sensores, gráficas y métricas'
   }
-] as const;
+];
 
-type ReportOptionId = typeof reportOptions[number]['id'];
-
-export const ReportConfigurationCard = ({ enabled }: ReportConfigurationCardProps) => {
-  const [selected, setSelected] = useState<ReportOptionId>('complete');
-
+export const ReportConfigurationCard = ({ 
+  enabled, 
+  reportType, 
+  onReportTypeChange,
+  availableSensors,
+  selectedSensors,
+  onSensorToggle
+}: ReportConfigurationCardProps) => {
   return (
-    <Card
+    <Card 
       className={`p-8 transition-all duration-300 ${
-        enabled ? 'opacity-100' : 'opacity-50 pointer-events-none'
+        enabled 
+          ? 'opacity-100' 
+          : 'opacity-50 pointer-events-none'
       }`}
     >
       <div className="flex items-start gap-4 mb-6">
@@ -39,41 +50,72 @@ export const ReportConfigurationCard = ({ enabled }: ReportConfigurationCardProp
           <span className="text-gray-800 font-semibold text-lg">2</span>
         </div>
         <div className="flex-1">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Configuración del reporte</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            Configuración del reporte
+          </h2>
           <p className="text-sm text-gray-600 leading-relaxed">
             Define el tipo y alcance del reporte a generar
           </p>
         </div>
       </div>
-
+      
       <div className="pl-14 space-y-3">
-        {reportOptions.map((option) => {
-          const isSelected = selected === option.id;
-
-          return (
+        {reportOptions.map((option) => (
+          <div key={option.id}>
             <label
-              key={option.id}
-              className={`flex items-start gap-3 p-4 border rounded-xl cursor-pointer transition-all duration-200
-                ${isSelected ? 'bg-gray-100 border-gray-300' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-100'}
-              `}
+              className={`flex items-start gap-3 p-4 border border-gray-200 rounded-xl cursor-pointer transition-all duration-200 ${
+                enabled 
+                  ? reportType === option.id
+                    ? 'border-gray-500 bg-gray-100/100'
+                    : 'hover:border-gray-300 hover:bg-gray-100/100'
+                  : ''
+              }`}
             >
               <input
                 type="radio"
                 name="report-type"
                 value={option.id}
-                checked={isSelected}
-                onChange={() => setSelected(option.id)}
+                checked={reportType === option.id}
+                onChange={() => onReportTypeChange(option.id)}
                 disabled={!enabled}
-                className="mt-1 w-4 h-4 accent-gray-900"
+                className="mt-1 w-4 h-4 accent-gray-950"
               />
-
               <div className="flex-1">
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">{option.title}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">{option.description}</p>
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                  {option.title}
+                </h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  {option.description}
+                </p>
               </div>
             </label>
-          );
-        })}
+            
+            {/* Sensor Selection - Only for "by-sensor" type */}
+            {reportType === 'by-sensor' && option.id === 'by-sensor' && availableSensors.length > 0 && (
+              <div className="ml-7 mt-3 p-4 bg-gray-50 rounded-xl border border-gray-200 animate-in fade-in slide-in-from-top-2 duration-300">
+                <p className="text-xs font-medium text-gray-700 mb-3">
+                  Selecciona los sensores a incluir:
+                </p>
+                <div className="space-y-2">
+                  {availableSensors.map((sensor) => (
+                    <label
+                      key={sensor}
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedSensors.includes(sensor)}
+                        onChange={() => onSensorToggle(sensor)}
+                        className="w-4 h-4 accent-neutral-900"
+                      />
+                      <SensorBadge sensor={sensor} size="sm" />
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </Card>
   );
