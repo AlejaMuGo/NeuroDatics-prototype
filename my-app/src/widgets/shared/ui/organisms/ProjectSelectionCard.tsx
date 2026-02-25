@@ -1,16 +1,11 @@
 import { Card } from '../atoms/Card';
 import { ProjectSelect } from '../molecules/ProjectSelect';
-import type { SensorType } from '../atoms/SensorBadge';
-
-interface Project {
-  id: string;
-  name: string;
-  sensors?: SensorType[];
-}
+import { SelectedProjectInfo } from './SelectedProjectInfo';
+import type { Project } from '@/widgets/entities/project';
 
 interface ProjectSelectionCardProps {
   projects: Project[];
-  selectedProject: string;
+  selectedProject: Project | null;
   onProjectChange: (projectId: string) => void;
 }
 
@@ -22,7 +17,7 @@ export const ProjectSelectionCard = ({
   return (
     <Card className="p-8 hover:shadow-md transition-shadow duration-300">
       <div className="flex items-start gap-4 mb-6">
-        <div className="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+        <div className="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
           <span className="text-gray-800 font-semibold text-lg">1</span>
         </div>
         <div className="flex-1">
@@ -38,10 +33,14 @@ export const ProjectSelectionCard = ({
       <div className="pl-14">
         <ProjectSelect
           projects={projects}
-          value={selectedProject}
+          value={selectedProject?.id || ''}
           onChange={onProjectChange}
           placeholder="Selecciona un proyecto..."
         />
+        
+        {selectedProject && (
+          <SelectedProjectInfo project={selectedProject} />
+        )}
       </div>
     </Card>
   );

@@ -1,29 +1,33 @@
-import { useState } from 'react';
 import { ProjectSelectionCard } from '@/widgets/shared/ui/organisms/ProjectSelectionCard';
 import { ReportsEmptyContainer } from '@/widgets/shared/ui/organisms/ReportsEmptyContainer';
-import type { SensorType } from '@/widgets/shared/ui/atoms/SensorBadge';
+import { ReportConfigurationCard } from '@/widgets/shared/ui/organisms/ReportConfigurationCard';
+import { useSelectedProject } from '@/widgets/features/select-project';
+import type { Project } from '@/widgets/entities/project';
 
 // Mock data
-const mockProjects = [
+const mockProjects: Project[] = [
   { 
     id: '1', 
     name: 'Publicidad Coca-cola',
-    sensors: ['EEG', 'GSR', 'EyeTracker'] as SensorType[]
+    createdAt: '28/11/2025',
+    sensors: ['EEG', 'GSR', 'EyeTracker']
   },
   { 
     id: '2', 
     name: 'Helados Colombianos',
-    sensors: ['EyeTracker'] as SensorType[]
+    createdAt: '15/10/2025',
+    sensors: ['EyeTracker']
   },
   { 
     id: '3', 
     name: 'Experimento atardecer',
-    sensors: ['GSR', 'EyeTracker'] as SensorType[]
+    createdAt: '03/12/2025',
+    sensors: ['GSR', 'EyeTracker']
   }
 ];
 
 export const ReportsPage = () => {
-  const [selectedProject, setSelectedProject] = useState('');
+  const { selectedProject, selectProject, hasSelection } = useSelectedProject(mockProjects);
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -33,7 +37,7 @@ export const ReportsPage = () => {
           <h1 className="text-4xl font-semibold text-gray-900 mb-3 tracking-tight">
             Reportes
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed ">
+          <p className="text-lg text-gray-600 leading-relaxed">
             Genera y descarga reportes en PDF de tus proyectos, incluyendo gráficas, estadísticas y análisis de sensores.
           </p>
         </div>
@@ -43,32 +47,21 @@ export const ReportsPage = () => {
           <ProjectSelectionCard
             projects={mockProjects}
             selectedProject={selectedProject}
-            onProjectChange={setSelectedProject}
+            onProjectChange={selectProject}
           />
         </div>
         
-        {/* Content Area */}
-        <div className={`transition-all duration-500 ease-in-out ${selectedProject ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}>
-          {!selectedProject ? (
-            <ReportsEmptyContainer />
-          ) : (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-10">
-              <div className="text-center py-16">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-6">
-                  <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                  Aquí aparecerá la configuración del reporte
-                </h3>
-                <p className="text-gray-600 text-lg">
-                  Proyecto seleccionado: <span className="font-medium text-gray-900">{mockProjects.find(p => p.id === selectedProject)?.name}</span>
-                </p>
-              </div>
-            </div>
-          )}
+        {/* Report Configuration Card */}
+        <div className="mb-8">
+          <ReportConfigurationCard enabled={hasSelection} />
         </div>
+        
+        {/* Empty State */}
+        {!hasSelection && (
+          <div className="transition-all duration-300">
+            <ReportsEmptyContainer />
+          </div>
+        )}
       </div>
     </div>
   );

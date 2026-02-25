@@ -18,7 +18,7 @@ export const EmptyState = ({
           <Icon 
             name={icon} 
             size={56} 
-            className="text-gray-400" 
+            className="text-zinc-400" 
           />
       </div>
       <h3 className="text-2xl font-semibold text-gray-900 mb-3">
