@@ -1,4 +1,6 @@
 import { Card } from '../atoms/Card';
+import { RadioGroup, RadioGroupItem } from '../../../../components/ui/radio-group';
+import { Label} from '../../../../components/ui/label';
 
 interface ReportConfigurationCardProps {
   enabled: boolean;
@@ -60,7 +62,7 @@ export const ReportConfigurationCard = ({ enabled }: ReportConfigurationCardProp
               name="report-type"
               value={option.id}
               disabled={!enabled}
-              className="mt-1 w-4 h-4 text-gray-600 border-gray-300 focus:ring-gray-500"
+              className="peer mt-1 w-4 h-4 accent-gray-900"
             />
             <div className="flex-1">
               <h3 className="text-sm font-semibold text-gray-900 mb-1">

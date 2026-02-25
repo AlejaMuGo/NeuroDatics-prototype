@@ -21,7 +21,7 @@ export const EmptyState = ({
             className="text-zinc-400" 
           />
       </div>
-      <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+      <h3 className="text-xl font-semibold text-gray-900 mb-3">
         {title}
       </h3>
       <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
