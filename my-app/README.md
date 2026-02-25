@@ -2,7 +2,7 @@
 
 ## 🎯 Descripción
 
-Vista del módulo de Reportes para generar reportes en PDF de proyectos con datos de bioseñales.
+Plataforma profesional para el análisis de bioseñales en neuromarketing. Incluye landing page completa y módulo de Reportes para generar reportes en PDF de proyectos con datos de sensores.
 
 ## 🚀 Inicio Rápido
 
@@ -17,7 +17,7 @@ npm run dev
 npm run build
 ```
 
-Abrir en navegador: `http://localhost:5173/reportes`
+Abrir en navegador: `http://localhost:5173`
 
 ## 🏗 Stack Tecnológico
 
@@ -35,30 +35,36 @@ src/
 │   ├── router/        # React Router
 │   └── styles/        # Estilos globales + Tailwind
 ├── pages/
+│   ├── home/          # Landing Page ⭐
 │   └── reports/       # Vista de Reportes ⭐
-└── widgets/shared/ui/
-    ├── atoms/         # Componentes básicos
-    ├── molecules/     # Componentes compuestos
-    └── organisms/     # Componentes complejos
+└── widgets/
+    ├── home/          # Componentes de landing
+    └── shared/ui/     # Componentes compartidos
+        ├── atoms/     # Componentes básicos
+        ├── molecules/ # Componentes compuestos
+        └── organisms/ # Componentes complejos
 ```
 
 ## 🎨 Componentes
 
-### Atoms (5)
-Icon, Button, Card, SelectTrigger, SelectOption
+### Landing Page (5 secciones)
+HeroSection, FeaturesSection, HowItWorksSection, CTASection, Footer
 
-### Molecules (2)
-ProjectSelect, EmptyState
+### Atoms (7)
+Icon, Button, Card, SelectTrigger, SelectOption, SensorBadge, Label
 
-### Organisms (3)
-Header, ProjectSelectionCard, ReportsEmptyContainer
+### Molecules (3)
+ProjectSelect, EmptyState, RadioGroup
+
+### Organisms (10)
+Header, ProjectSelectionCard, ReportsEmptyContainer, SelectedProjectInfo, ReportConfigurationCard, ReportContentCard, ReportPreview, ExportOptionsCard
 
 ### Pages (4)
-ReportsPage (completa), HomePage, ProjectsPage, DashboardPage
+HomePage (landing completa) ⭐, ReportsPage (completa) ⭐, ProjectsPage, DashboardPage
 
 ## 🎯 Rutas
 
-- `/` - Inicio
+- `/` - **Landing Page** ✅
 - `/proyectos` - Proyectos
 - `/dashboard` - Dashboard
 - `/reportes` - **Reportes** ✅
@@ -94,22 +100,34 @@ import { Header } from '@/widgets/shared/ui/organisms/Header';
 
 ## 📊 Características
 
-✅ Diseño moderno y profesional
-✅ Selección de proyectos con dropdown
-✅ Estado vacío cuando no hay selección
-✅ Arquitectura Atomic Design
-✅ Feature-Sliced Design
+### Landing Page
+✅ Hero section con logo y video tutorial
+✅ Sección de características (3 sensores)
+✅ Sección "¿Cómo funciona?" (4 pasos)
+✅ CTA final con botón de acción
+✅ Footer minimalista
+
+### Módulo de Reportes
+✅ Selección de proyectos con sensores
+✅ Configuración dinámica de reportes
+✅ Selección de contenido con preview
+✅ Opciones de exportación
+✅ Generación de reportes PDF
+
+### Arquitectura
+✅ Atomic Design + Feature-Sliced
 ✅ TypeScript estricto
 ✅ Animaciones suaves
-✅ Logo NeuroDatics en header
+✅ Diseño responsive
+✅ Paleta de grises elegante
 
 ## 🔄 Próximos Pasos
 
-1. Implementar formulario de configuración del reporte
-2. Integrar generación de PDF
-3. Conectar con backend
-4. Agregar validaciones
-5. Implementar historial de reportes
+1. Implementar vista de Proyectos
+2. Implementar vista de Dashboard
+3. Integrar generación de PDF real
+4. Conectar con backend
+5. Agregar autenticación
 
 ## 📝 Notas
 
