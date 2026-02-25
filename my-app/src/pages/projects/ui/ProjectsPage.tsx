@@ -18,7 +18,7 @@ export const ProjectsPage = () => {
               <div className="transition-all duration-300">
                 <ProjectsEmptyContainer />
               </div>
-            )}
+            )}      
     </div>
   </div>
   );
