@@ -66,7 +66,7 @@ export const ReportsPage = () => {
       <div className="max-w-6xl mx-auto px-8 py-10">
         {/* Header Section */}
         <div className="mb-10">
-          <h1 className="text-4xl font-semibold text-gray-900 mb-3 tracking-tight">
+          <h1 className="text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
             Reportes
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed">

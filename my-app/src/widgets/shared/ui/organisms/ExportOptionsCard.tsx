@@ -88,7 +88,7 @@ export const ExportOptionsCard = ({
           disabled={!canDownload}
           className={`w-full mt-6 flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-white transition-all duration-200 ${
             canDownload
-              ? 'bg-gray-950 hover:bg-gray-800 hover:scale-[1.02] active:scale-[0.98]'
+              ? 'bg-gray-950 hover:bg-gray-700 hover:scale-[1.02] active:scale-[0.98]'
               : 'bg-gray-400 cursor-not-allowed'
           }`}
         >

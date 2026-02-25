@@ -31,7 +31,7 @@ export const HeroSection = () => {
       {/* CTA Button */}
       <Button 
         variant="primary"
-        className="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm font-medium"
+        className="bg-black text-white px-8 py-3 hover:bg-gray-700 transition-colors duration-200 text-sm font-medium"
       >
         Ver demo
       </Button>

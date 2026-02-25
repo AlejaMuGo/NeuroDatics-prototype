@@ -13,7 +13,7 @@ export const Button = ({
   className = '',
   ...props 
 }: ButtonProps) => {
-  const baseStyles = 'font-poppins font-medium rounded-lg transition-colors duration-200 outline-none focus:outline-none focus:ring-2 focus:ring-black/30 focus:ring-offset-2 focus:ring-offset-white';
+  const baseStyles = 'font-poppins opacity-100 visible font-medium rounded-lg transition-colors duration-200';
   
   const variantStyles = {
     primary: 'bg-black-600 text-white hover:bg-gray-800 focus:ring-black-500',
