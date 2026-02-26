@@ -42,8 +42,12 @@ export const ProjectsEmptyContainer = () => {
             <DialogTitle className='text-xl'>Crear nuevo proyecto</DialogTitle>
             <DialogDescription>
               Paso 1 de 4
-
-              <Progress value={25} className='mt-6'/>
+              <div className='flex flex-row space-x-2 mt-6'>
+              <Progress value={100}/>
+              <Progress value={0} className='bg-gray-200'/>
+              <Progress value={0} className='bg-gray-200'/>
+              <Progress value={0} className='bg-gray-200'/>
+              </div>
             </DialogDescription>
           </DialogHeader>
 
