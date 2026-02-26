@@ -36,9 +36,11 @@ src/
 │   └── styles/        # Estilos globales + Tailwind
 ├── pages/
 │   ├── home/          # Landing Page ⭐
+│   ├── projects/      # Vista de Proyectos ⭐
 │   └── reports/       # Vista de Reportes ⭐
 └── widgets/
     ├── home/          # Componentes de landing
+    ├── features/      # Features (create-project, select-project, etc.)
     └── shared/ui/     # Componentes compartidos
         ├── atoms/     # Componentes básicos
         ├── molecules/ # Componentes compuestos
@@ -50,22 +52,25 @@ src/
 ### Landing Page (5 secciones)
 HeroSection, FeaturesSection, HowItWorksSection, CTASection, Footer
 
+### Wizard de Proyectos (4 pasos)
+CreateProjectStep1, CreateProjectStep2, CreateProjectStep3, CreateProjectStep4
+
 ### Atoms (7)
 Icon, Button, Card, SelectTrigger, SelectOption, SensorBadge, Label
 
 ### Molecules (3)
 ProjectSelect, EmptyState, RadioGroup
 
-### Organisms (10)
-Header, ProjectSelectionCard, ReportsEmptyContainer, SelectedProjectInfo, ReportConfigurationCard, ReportContentCard, ReportPreview, ExportOptionsCard
+### Organisms (12)
+Header, ProjectSelectionCard, ProjectsGrid, ProjectsEmptyContainer, ReportsEmptyContainer, SelectedProjectInfo, ReportConfigurationCard, ReportContentCard, ReportPreview, ExportOptionsCard
 
 ### Pages (4)
-HomePage (landing completa) ⭐, ReportsPage (completa) ⭐, ProjectsPage, DashboardPage
+HomePage (landing completa) ⭐, ProjectsPage (con wizard) ⭐, ReportsPage (completa) ⭐, DashboardPage
 
 ## 🎯 Rutas
 
 - `/` - **Landing Page** ✅
-- `/proyectos` - Proyectos
+- `/proyectos` - **Proyectos** ✅ (con wizard de creación)
 - `/dashboard` - Dashboard
 - `/reportes` - **Reportes** ✅
 
@@ -107,6 +112,20 @@ import { Header } from '@/widgets/shared/ui/organisms/Header';
 ✅ CTA final con botón de acción
 ✅ Footer minimalista
 
+### Módulo de Proyectos
+✅ Vista de lista de proyectos con grid
+✅ Wizard de creación de proyectos (4 pasos)
+  - Paso 1: Información básica del proyecto
+  - Paso 2: Selección de sensores (EEG, GSR, Eye Tracker)
+  - Paso 3: Datos demográficos de participantes
+  - Paso 4: Definición de AOIs (Áreas de Interés)
+✅ Estado vacío con call-to-action
+✅ Barra de progreso segmentada
+✅ Persistencia de datos entre pasos
+✅ Creación de proyectos con ID único
+✅ Persistencia en localStorage
+✅ Actualización automática de la lista
+
 ### Módulo de Reportes
 ✅ Selección de proyectos con sensores
 ✅ Configuración dinámica de reportes
@@ -123,8 +142,8 @@ import { Header } from '@/widgets/shared/ui/organisms/Header';
 
 ## 🔄 Próximos Pasos
 
-1. Implementar vista de Proyectos
-2. Implementar vista de Dashboard
+1. Implementar vista de Dashboard
+2. Agregar funcionalidad de dibujo de AOIs en Step 4
 3. Integrar generación de PDF real
 4. Conectar con backend
 5. Agregar autenticación
